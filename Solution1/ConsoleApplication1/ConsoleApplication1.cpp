@@ -6,6 +6,7 @@ using namespace std;
 
 int main() {
 	int process,cartProcess,check;
+	short int promoBlock = 0;
 	double balance = 9000;
 	double resultValue = 0;
 	int close = 0;
@@ -36,6 +37,7 @@ int main() {
 	product4.Name = "Ipad pro";
 	product4.Price = 2999.99;
 	product4.id = 4;
+
 #pragma endregion 
 
 
@@ -78,6 +80,7 @@ int main() {
 						SelectedProducts.push_back(obj);
 						resultValue += obj.Price;
 					}
+					
 				}
 			} while (check != 0);
 			break;
@@ -110,20 +113,32 @@ int main() {
 				cout << "\n";
 				cout << "Promo kodu daxil edin: ";
 				cin >> promoCodeUser;
-				if (promoCodeUser == promoCodeData) {
-					resultValue *= 0.8;
-					cout << "\n";
-					cout << "20% endirim tetbiq olundu.\n";
+				if (promoBlock == 0) {
+					if (promoCodeUser == promoCodeData) {
+						promoBlock++;
+						resultValue *= 0.8;
+						cout << "\n";
+						cout << "20% endirim tetbiq olundu.\n";
+					}
+					else
+						cout << "Bele kod yoxdur!\n";
 				}
 				else
-					cout << "Bele kod yoxdur!\n";
+					cout << "Bu kodu artiq isletmisiniz.";
+				
 				break;
 
 
 			case 2:
 
-				if (balance >= resultValue)
-					cout << "Odenildi.";
+				if (balance >= resultValue) {
+					cout << "Odenildi.\n";
+					balance -= resultValue;
+					cout << "Qalan balans: ";
+					cout << balance;
+					cout << "\n";
+					close++;
+				}
 				else
 					cout << "Balansinizda kifayet qeder pul yoxdur!";
 				
